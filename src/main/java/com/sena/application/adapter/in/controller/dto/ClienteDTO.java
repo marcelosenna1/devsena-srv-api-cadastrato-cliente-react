@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record ClienteDTO(
         Long id,
-        @NotNull(message = "Nome não deve ser preenchido")
+        @NotNull(message = "Nome deve ser preenchido")
         String nome,
         @NotNull
         @Min(value = 18, message = "Idade deve ser maior ou igual a 18")
