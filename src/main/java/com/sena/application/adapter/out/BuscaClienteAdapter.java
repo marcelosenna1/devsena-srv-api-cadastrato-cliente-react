@@ -5,10 +5,13 @@ import com.sena.application.adapter.out.repository.mapper.ClienteEntityMapper;
 import com.sena.application.core.domain.Cliente;
 import com.sena.application.core.exception.ClienteNaoEncontradoException;
 import com.sena.application.core.port.in.BuscaClientesInputPort;
+import com.sena.application.core.port.out.BuscaClientesOutputPort;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class BuscaClienteAdapter implements BuscaClientesInputPort {
+@Component
+public class BuscaClienteAdapter implements BuscaClientesOutputPort {
 
     private final ClienteRepository clienteRepository;
     private final ClienteEntityMapper mapper;
