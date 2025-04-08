@@ -1,4 +1,4 @@
-package com.sena.application.core.model;
+package com.sena.application.core.domain;
 
 public record Cliente(
         Long id,
