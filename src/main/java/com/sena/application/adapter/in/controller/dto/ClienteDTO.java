@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 public record ClienteDTO(
-        @Schema(description = "Identificador único do cliente", required = false)
         Long id,
         @NotNull(message = "Nome não deve ser preenchido")
         String nome,

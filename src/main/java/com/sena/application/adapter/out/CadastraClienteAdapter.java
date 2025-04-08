@@ -21,8 +21,8 @@ public class CadastraClienteAdapter implements CadastraClienteOutputPort {
 
     @Override
     public Cliente cadastrarCliente(Cliente cliente) {
-        ClienteEntity clienteEntity = mapper.INSTANCE.toEntity(cliente);
+        ClienteEntity clienteEntity = mapper.toEntity(cliente);
         var clienteCadastrado = repository.save(clienteEntity);
-        return mapper.INSTANCE.toDomain(clienteCadastrado);
+        return mapper.toDomain(clienteCadastrado);
     }
 }

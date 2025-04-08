@@ -1,8 +1,5 @@
 package com.sena.application.config;
 
-import com.sena.application.adapter.out.BuscaClienteAdapter;
-import com.sena.application.adapter.out.repository.ClienteRepository;
-import com.sena.application.adapter.out.repository.mapper.ClienteEntityMapper;
 import com.sena.application.core.port.in.BuscaClientesInputPort;
 import com.sena.application.core.port.in.CadastraClienteInputPort;
 import com.sena.application.core.port.in.ClienteInputPort;
