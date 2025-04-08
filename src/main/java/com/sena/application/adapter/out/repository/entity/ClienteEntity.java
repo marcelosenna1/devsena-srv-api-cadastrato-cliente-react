@@ -1,25 +1,22 @@
 package com.sena.application.adapter.out.repository.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "cliente")
-public record ClienteEntity (
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        Long id,
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ClienteEntity {
 
-        @NotNull(message = "Nome não deve ser preenchido")
-        String nome,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+    private Integer idade;
+    private String email;
 
-        @NotNull
-        @Min(value = 18, message = "Idade deve ser maior ou igual a 18")
-        Integer idade,
-
-        @Email(message = "Email inválido")
-        String email
-) {
 }

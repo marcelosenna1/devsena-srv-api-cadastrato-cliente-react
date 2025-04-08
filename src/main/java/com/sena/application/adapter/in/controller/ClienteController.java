@@ -1,6 +1,7 @@
 package com.sena.application.adapter.in.controller;
 
-import com.sena.application.core.domain.Cliente;
+import com.sena.application.adapter.in.controller.dto.ClienteDTO;
+import com.sena.application.adapter.in.controller.mapper.ClienteDTOMapper;
 import com.sena.application.core.port.in.ClienteInputPort;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +14,20 @@ import java.util.List;
 public class ClienteController {
 
     private final ClienteInputPort service;
+    private final ClienteDTOMapper mapper;
 
-    public ClienteController(ClienteInputPort service) {
+    public ClienteController(ClienteInputPort service,
+                             ClienteDTOMapper mapper) {
         this.service = service;
+        this.mapper = mapper;
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> cadastrarCliente(@Valid @RequestBody Cliente cliente) {
+    public ResponseEntity<ClienteDTO> cadastrarCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
+        var cliente = mapper.toDomain(clienteDTO);
         var clienteCadastrado = service.cadastrarCliente(cliente);
-        return ResponseEntity.ok(clienteCadastrado);
+        var clienteCadastradoDTO = mapper.toDto(clienteCadastrado);
+        return ResponseEntity.ok(clienteCadastradoDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -31,8 +37,9 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> listarClientes() {
+    public ResponseEntity<List<ClienteDTO>> listarClientes() {
         var clientes = service.listarClientes();
-        return ResponseEntity.ok(clientes);
+        var clienteDTO = mapper.toDtoList(clientes);
+        return ResponseEntity.ok(clienteDTO);
     }
 }
