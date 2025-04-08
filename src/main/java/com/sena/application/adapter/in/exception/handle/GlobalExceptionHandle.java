@@ -1,5 +1,6 @@
-package com.sena.application.adapter.in.controller.exception.handle;
+package com.sena.application.adapter.in.exception.handle;
 
+import com.sena.application.adapter.in.exception.exception.ErrorResponse;
 import com.sena.application.core.exception.ClienteNaoEncontradoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
