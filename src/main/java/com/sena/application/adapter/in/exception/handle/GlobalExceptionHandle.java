@@ -28,7 +28,7 @@ public class GlobalExceptionHandle {
     }
 
     @ExceptionHandler({ClienteDuplicadoException.class, EmailDuplicadoException.class})
-    public ResponseEntity<ErrorResponse> handleClienteDuplicadoExceptioException(ClienteDuplicadoException ex) {
+    public ResponseEntity<ErrorResponse> handleClienteDuplicadoExceptioException(RuntimeException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
                 ex.getMessage(),
                 HttpStatus.CONFLICT.value(),
