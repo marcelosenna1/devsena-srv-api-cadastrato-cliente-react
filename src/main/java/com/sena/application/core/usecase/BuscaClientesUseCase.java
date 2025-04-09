@@ -5,6 +5,7 @@ import com.sena.application.core.port.in.BuscaClientesInputPort;
 import com.sena.application.core.port.out.BuscaClientesOutputPort;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BuscaClientesUseCase implements BuscaClientesInputPort {
 
@@ -17,5 +18,10 @@ public class BuscaClientesUseCase implements BuscaClientesInputPort {
     @Override
     public List<Cliente> buscaClientes() {
         return buscaClientesOutPort.buscaClientes();
+    }
+
+    @Override
+    public Optional<Cliente> buscaClientePorId(Long id) {
+        return Optional.empty();
     }
 }
