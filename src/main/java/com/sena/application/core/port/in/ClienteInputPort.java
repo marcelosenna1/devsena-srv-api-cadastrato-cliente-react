@@ -9,6 +9,6 @@ public interface ClienteInputPort {
     Cliente cadastrarCliente(Cliente cliente);
     void deletarCliente(Long id);
     List<Cliente> listarClientes();
-
     Cliente atualizarCliente(Cliente cliente);
+    Cliente buscarClientePorId(Long id);
 }

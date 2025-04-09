@@ -3,6 +3,7 @@ package com.sena.application.adapter.in.controller;
 import com.sena.application.adapter.in.controller.dto.request.ClienteRequest;
 import com.sena.application.adapter.in.controller.dto.response.ClienteResponse;
 import com.sena.application.adapter.in.controller.mapper.ClienteDTOMapper;
+import com.sena.application.core.exception.ClienteNaoEncontradoException;
 import com.sena.application.core.port.in.ClienteInputPort;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -52,6 +53,13 @@ public class ClienteController {
         var cliente = mapper.toDomain(clienteRequest);
         var clienteAtualizado = service.atualizarCliente(cliente);
         var clienteResponse = mapper.toResponse(clienteAtualizado);
+        return ResponseEntity.ok(clienteResponse);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteResponse> buscarClientePorId(@PathVariable Long id) {
+        var cliente = service.buscarClientePorId(id);
+        var clienteResponse = mapper.toResponse(cliente);
         return ResponseEntity.ok(clienteResponse);
     }
 }

@@ -7,6 +7,7 @@ import com.sena.application.core.port.out.BuscaClientesOutputPort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BuscaClienteAdapter implements BuscaClientesOutputPort {
@@ -22,7 +23,16 @@ public class BuscaClienteAdapter implements BuscaClientesOutputPort {
 
     @Override
     public List<Cliente> buscaClientes() {
-        var saida = clienteRepository.findAll();
-        return mapper.toDomainList(saida);
+        return clienteRepository
+                .findAll()
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public Optional<Cliente> buscaClientePorId(Long id) {
+        return clienteRepository.findById(id)
+                .map(mapper::toDomain);
     }
 }

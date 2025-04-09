@@ -1,6 +1,7 @@
 package com.sena.application.core.service;
 
 import com.sena.application.core.domain.Cliente;
+import com.sena.application.core.exception.ClienteNaoEncontradoException;
 import com.sena.application.core.port.in.*;
 
 import java.util.List;
@@ -37,5 +38,11 @@ public class ClienteService implements ClienteInputPort {
     @Override
     public Cliente atualizarCliente(Cliente cliente) {
         return atualizaClienteInputPort.atualizaCliente(cliente);
+    }
+
+    @Override
+    public Cliente buscarClientePorId(Long id) {
+        return buscaClientesInputPort.buscaClientePorId(id).orElseThrow(
+                () -> new ClienteNaoEncontradoException("Cliente não encontrado com o ID: " + id));
     }
 }
