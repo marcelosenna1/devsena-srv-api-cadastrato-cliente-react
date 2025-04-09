@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +52,18 @@ public class GlobalExceptionHandle {
     public ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
                 "Erro de leitura do corpo da requisição: " + ex.getMostSpecificCause().getMessage(),
+                HttpStatus.BAD_REQUEST.value(),
+                System.currentTimeMillis()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+        String mensagem = String.format("O parâmetro '%s' recebeu um valor inválido: '%s'. Esperado um valor do tipo '%s'.",
+                ex.getName(), ex.getValue(), ex.getRequiredType().getSimpleName());
+        ErrorResponse errorResponse = new ErrorResponse(
+                mensagem,
                 HttpStatus.BAD_REQUEST.value(),
                 System.currentTimeMillis()
         );
