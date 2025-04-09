@@ -2,7 +2,7 @@
 
 ![Java](https://img.shields.io/badge/Java-17-blue.svg)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.2-brightgreen.svg)
-![License](https://img.shields.io/github/license/seu-usuario/devsena-srv-api-cadastro-react)
+![License](https://img.shields.io/github/license/marcelosenna1/devsena-srv-api-cadastro-react)
 
 API desenvolvida em Java com Spring Boot para servir de backend a uma aplicação frontend em React. Este projeto visa demonstrar a integração entre backend e frontend em uma estrutura moderna e modular, com suporte a documentação automática via Swagger (OpenAPI).
 
