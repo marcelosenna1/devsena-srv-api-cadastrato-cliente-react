@@ -17,8 +17,8 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandle {
 
-    @ExceptionHandler({ClienteNaoEncontradoException.class, EmailDuplicadoException.class})
-    public ResponseEntity<ErrorResponse> handleClienteNaoEncontradoException(RuntimeException ex) {
+    @ExceptionHandler(ClienteNaoEncontradoException.class)
+    public ResponseEntity<ErrorResponse> handleClienteNaoEncontradoException(ClienteNaoEncontradoException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
                 ex.getMessage(),
                 HttpStatus.NOT_FOUND.value(),
@@ -27,7 +27,7 @@ public class GlobalExceptionHandle {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-    @ExceptionHandler(ClienteDuplicadoException.class)
+    @ExceptionHandler({ClienteDuplicadoException.class, EmailDuplicadoException.class})
     public ResponseEntity<ErrorResponse> handleClienteDuplicadoExceptioException(ClienteDuplicadoException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
                 ex.getMessage(),

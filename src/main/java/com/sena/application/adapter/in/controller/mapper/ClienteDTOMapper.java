@@ -1,6 +1,7 @@
 package com.sena.application.adapter.in.controller.mapper;
 
-import com.sena.application.adapter.in.controller.dto.ClienteDTO;
+import com.sena.application.adapter.in.controller.dto.request.ClienteRequest;
+import com.sena.application.adapter.in.controller.dto.response.ClienteResponse;
 import com.sena.application.core.domain.Cliente;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -12,8 +13,8 @@ public interface ClienteDTOMapper {
 
     ClienteDTOMapper INSTANCE = Mappers.getMapper(ClienteDTOMapper.class);
 
-    Cliente toDomain(ClienteDTO clienteDto);
-    ClienteDTO toDto(Cliente cliente);
+    Cliente toDomain(ClienteRequest clienteRequest);
+    ClienteResponse toResponse(Cliente cliente);
 
-    List<ClienteDTO> toDtoList(List<Cliente> clientes);
+    List<ClienteResponse> toResponseList(List<Cliente> clientes);
 }

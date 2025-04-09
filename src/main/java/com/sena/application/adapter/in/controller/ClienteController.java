@@ -1,6 +1,7 @@
 package com.sena.application.adapter.in.controller;
 
-import com.sena.application.adapter.in.controller.dto.ClienteDTO;
+import com.sena.application.adapter.in.controller.dto.request.ClienteRequest;
+import com.sena.application.adapter.in.controller.dto.response.ClienteResponse;
 import com.sena.application.adapter.in.controller.mapper.ClienteDTOMapper;
 import com.sena.application.core.port.in.ClienteInputPort;
 import jakarta.validation.Valid;
@@ -23,11 +24,11 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<ClienteDTO> cadastrarCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
-        var cliente = mapper.toDomain(clienteDTO);
+    public ResponseEntity<ClienteResponse> cadastrarCliente(@Valid @RequestBody ClienteRequest clienteRequest) {
+        var cliente = mapper.toDomain(clienteRequest);
         var clienteCadastrado = service.cadastrarCliente(cliente);
-        var clienteCadastradoDTO = mapper.toDto(clienteCadastrado);
-        return ResponseEntity.ok(clienteCadastradoDTO);
+        var clienteResponse = mapper.toResponse(clienteCadastrado);
+        return ResponseEntity.ok(clienteResponse);
     }
 
     @DeleteMapping("/{id}")
@@ -37,9 +38,9 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ClienteDTO>> listarClientes() {
+    public ResponseEntity<List<ClienteResponse>> listarClientes() {
         var clientes = service.listarClientes();
-        var clienteDTO = mapper.toDtoList(clientes);
+        var clienteDTO = mapper.toResponseList(clientes);
         return ResponseEntity.ok(clienteDTO);
     }
 }
