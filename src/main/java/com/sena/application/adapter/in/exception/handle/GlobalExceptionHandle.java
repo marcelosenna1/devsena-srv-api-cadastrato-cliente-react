@@ -3,6 +3,7 @@ package com.sena.application.adapter.in.exception.handle;
 import com.sena.application.adapter.in.exception.model.ErrorResponse;
 import com.sena.application.core.exception.ClienteDuplicadoException;
 import com.sena.application.core.exception.ClienteNaoEncontradoException;
+import com.sena.application.core.exception.EmailDuplicadoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -16,7 +17,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandle {
 
-    @ExceptionHandler(ClienteNaoEncontradoException.class)
+    @ExceptionHandler({ClienteNaoEncontradoException.class, EmailDuplicadoException.class})
     public ResponseEntity<ErrorResponse> handleClienteNaoEncontradoException(ClienteNaoEncontradoException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
                 ex.getMessage(),
