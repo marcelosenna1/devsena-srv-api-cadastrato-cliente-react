@@ -22,6 +22,6 @@ public class BuscaClientesUseCase implements BuscaClientesInputPort {
 
     @Override
     public Optional<Cliente> buscaClientePorId(Long id) {
-        return Optional.empty();
+        return buscaClientesOutPort.buscaClientePorId(id);
     }
 }
