@@ -18,7 +18,7 @@ import java.util.Map;
 public class GlobalExceptionHandle {
 
     @ExceptionHandler({ClienteNaoEncontradoException.class, EmailDuplicadoException.class})
-    public ResponseEntity<ErrorResponse> handleClienteNaoEncontradoException(ClienteNaoEncontradoException ex) {
+    public ResponseEntity<ErrorResponse> handleClienteNaoEncontradoException(RuntimeException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
                 ex.getMessage(),
                 HttpStatus.NOT_FOUND.value(),
