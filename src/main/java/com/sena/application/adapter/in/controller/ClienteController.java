@@ -43,4 +43,11 @@ public class ClienteController {
         var clienteDTO = mapper.toResponseList(clientes);
         return ResponseEntity.ok(clienteDTO);
     }
+    @PutMapping
+    public ResponseEntity<ClienteResponse> atualizarCliente(@Valid @RequestBody ClienteRequest clienteRequest) {
+        var cliente = mapper.toDomain(clienteRequest);
+        var clienteAtualizado = service.atualizarCliente(cliente);
+        var clienteResponse = mapper.toResponse(clienteAtualizado);
+        return ResponseEntity.ok(clienteResponse);
+    }
 }
