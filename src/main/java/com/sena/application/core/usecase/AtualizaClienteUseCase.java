@@ -14,6 +14,6 @@ public class AtualizaClienteUseCase implements AtualizaClienteInputPort {
 
     @Override
     public Cliente atualizaCliente(Cliente cliente) {
-        return null;
+        return atualizaClienteOutputPort.atualizaCliente(cliente);
     }
 }
