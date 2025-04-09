@@ -1,6 +1,7 @@
 package com.sena.application.adapter.in.exception.handle;
 
 import com.sena.application.adapter.in.exception.model.ErrorResponse;
+import com.sena.application.core.exception.ClienteDuplicadoException;
 import com.sena.application.core.exception.ClienteNaoEncontradoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,20 @@ public class GlobalExceptionHandle {
     public ResponseEntity<ErrorResponse> handleClienteNaoEncontradoException(ClienteNaoEncontradoException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
                 ex.getMessage(),
-                404,
+                HttpStatus.NOT_FOUND.value(),
                 System.currentTimeMillis()
         );
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(ClienteDuplicadoException.class)
+    public ResponseEntity<ErrorResponse> handleClienteDuplicadoExceptioException(ClienteDuplicadoException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                ex.getMessage(),
+                HttpStatus.CONFLICT.value(),
+                System.currentTimeMillis()
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
