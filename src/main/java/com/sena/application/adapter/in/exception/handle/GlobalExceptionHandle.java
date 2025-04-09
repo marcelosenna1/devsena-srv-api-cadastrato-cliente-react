@@ -6,6 +6,7 @@ import com.sena.application.core.exception.ClienteNaoEncontradoException;
 import com.sena.application.core.exception.EmailDuplicadoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -44,6 +45,16 @@ public class GlobalExceptionHandle {
             errors.put(error.getField(), error.getDefaultMessage());
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                "Erro de leitura do corpo da requisição: " + ex.getMostSpecificCause().getMessage(),
+                HttpStatus.BAD_REQUEST.value(),
+                System.currentTimeMillis()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
 }
