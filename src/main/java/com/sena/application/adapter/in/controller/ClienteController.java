@@ -5,6 +5,7 @@ import com.sena.application.adapter.in.controller.dto.response.ClienteResponse;
 import com.sena.application.adapter.in.controller.mapper.ClienteDTOMapper;
 import com.sena.application.core.port.in.ClienteInputPort;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,19 +29,29 @@ public class ClienteController {
         var cliente = mapper.toDomain(clienteRequest);
         var clienteCadastrado = service.cadastrarCliente(cliente);
         var clienteResponse = mapper.toResponse(clienteCadastrado);
-        return ResponseEntity.ok(clienteResponse);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(clienteResponse);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
         service.deletarCliente(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity
+                .noContent()
+                .build();
     }
-
     @GetMapping
     public ResponseEntity<List<ClienteResponse>> listarClientes() {
         var clientes = service.listarClientes();
         var clienteDTO = mapper.toResponseList(clientes);
         return ResponseEntity.ok(clienteDTO);
+    }
+    @PutMapping
+    public ResponseEntity<ClienteResponse> atualizarCliente(@Valid @RequestBody ClienteRequest clienteRequest) {
+        var cliente = mapper.toDomain(clienteRequest);
+        var clienteAtualizado = service.atualizarCliente(cliente);
+        var clienteResponse = mapper.toResponse(clienteAtualizado);
+        return ResponseEntity.ok(clienteResponse);
     }
 }
