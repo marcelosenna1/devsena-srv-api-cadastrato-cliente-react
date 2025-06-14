@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Component
 public class JwtTokenUtil {
-    private static final String SECRET_KEY = "YS12YWxpZC1zdHJpbmctc2VjcmV0LXRoYXQtaXMtYXQtbGVhc3QtNTEyLWJpdHMtbG9uZy13aGljaC1pcy12ZXJ5LWxvbmc=";
+    private static final String SECRET_KEY = "";
     private static final long VALIDITY_MS = 60*1000; // 1 minuto em milissegundos
 
     public String generateToken(Authentication auth) {
