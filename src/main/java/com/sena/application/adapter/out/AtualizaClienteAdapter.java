@@ -5,7 +5,6 @@ import com.sena.application.adapter.out.repository.mapper.ClienteEntityMapper;
 import com.sena.application.core.domain.Cliente;
 import com.sena.application.core.exception.ClienteNaoEncontradoException;
 import com.sena.application.core.port.out.AtualizaClienteOutputPort;
-import com.sena.application.core.port.out.BuscaClientesOutputPort;
 import org.springframework.stereotype.Component;
 
 @Component

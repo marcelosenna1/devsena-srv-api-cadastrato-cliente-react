@@ -10,7 +10,11 @@ public record ClienteRequest(
         @Min(value = 18, message = "Idade deve ser maior ou igual a 18")
         @Max(value = 120, message = "Idade deve ser menor ou igual a 120")
         Integer idade,
+        @NotNull
         @Email(message = "Email inválido")
-        String email
+        String email,
+        @NotNull
+        @Size(min = 6, max = 30, message = "A senha deve ter entre 6 e 30 caracteres")
+        String senha
 ) {
 }
