@@ -4,6 +4,7 @@ public record Cliente(
         Long id,
         String nome,
         Integer idade,
-        String email
+        String email,
+        String senha
 ) {
 }
